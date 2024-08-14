@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+  <!-- Sign-up form start -->
+
+  <div class="main__container">
+    <div class="main__container-content">
+       <h1>Stay updated!</h1>
+       <p>Join 60,000+ product managers receiving monthly updates on:</p>
+       <div class="list">
+           <img src="assets/images/icon-list.svg" alt="icon-list" class="icon-list">
+           <p>Product discovery and building what matters</p>
+       </div>
+       <div class="list">
+           <img src="assets/images/icon-list.svg" alt="icon-list" class="icon-list">
+           <p>Measuring to ensure updates are a success</p>
+       </div>
+       <div class="list">
+           <img src="assets/images/icon-list.svg" alt="icon-list" class="icon-list">
+           <p>And much more!</p>
+       </div>  
+            <form  class=" form" novalidate>
+                 <div class="form__title">
+                     <label for="email">Email address</label>
+                     <div class="messageError">Valid email required</div>
+                  </div>
+                  <input type="text" name="email" id="email" placeholder="email@company.com">
+                  <button type="submit" class="btn">Subscribe to monthly newsletter</button>
+            </form>
+    </div>
+      <img src="assets/images/illustration-sign-up-desktop.svg" alt="illustration-sign-up-desktop" class="illustration-sign-up-desktop">
+      <img src="assets/images/illustration-sign-up-mobile.svg" alt="illustration-sign-up-mobile" class="illustration-sign-up-mobile">
+  </div>  
+
+  <!-- Sign-up form end -->
+  
+  
+
+</body>
+
+ <!--Success Message start-->
+   
+ <div class="popup">
+  <div class="popup__content">
+    <img src="assets/images/icon-success.svg" alt="icon-success">
+    <h1>Thanks for suscribing!</h1>
+    <p>
+      A confirmation email has been sent to <span id="popup-email"></span>.
+      Please open it and click the button inside to confirm your subscription.
+    </p>
+    <button class="cta" onclick="fermerPopup()">Dismiss message</button>
+  </div>
+ </div>
+
+<!--Success Message end-->
+
+<!--JavaScript-->
+
+<script>
+  
+function ouvrirPopup(email) {
+    document.getElementById("popup-email").innerText = email;
+    let popup = document.querySelector(".popup");
+    popup.classList.add("active")
+  }
+
+
+function fermerPopup() {
+    let popup = document.querySelector(".popup");
+    popup.classList.remove("active")
+  }
+
+
+const form = document.querySelector(".form")
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  let email = document.getElementById("email");
+  let messageError = document.querySelector(".messageError");
+  let emailInput = email.value;
+
+  let regex = new RegExp("[a-z]+@[a-z]+\\.[a-z]+")
+
+  if(regex.test(emailInput) && emailInput !=""){
+    messageError.classList.remove("active");
+    email.classList.remove("error");
+    ouvrirPopup(emailInput);
+  }else {
+    messageError.classList.add("active");
+    email.classList.add("error");
+  }
+
+});
+</script>
+
+
+</html>
